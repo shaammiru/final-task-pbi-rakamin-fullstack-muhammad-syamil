@@ -8,6 +8,12 @@
 *.so
 *.dylib
 
+# Temporary build binaries
+tmp
+
+# Air configuration file
+.air.toml
+
 # Test binary, built with `go test -c`
 *.test
 
@@ -19,3 +25,6 @@
 
 # Go workspace file
 go.work
+
+# IDE Configuration
+.idea
