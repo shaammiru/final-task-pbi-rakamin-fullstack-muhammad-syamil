@@ -2,10 +2,10 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/controllers"
+	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/helpers"
 	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
 	"net/http"
-
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/controllers"
 )
 
 func SetupUserRouter(router *gin.Engine) {
@@ -19,7 +19,7 @@ func SetupUserRouter(router *gin.Engine) {
 }
 
 func registerHandler(c *gin.Context) {
-	var userData models.User
+	var userData models.UserRegister
 	if err := c.ShouldBindJSON(&userData); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Register failed",
@@ -29,7 +29,21 @@ func registerHandler(c *gin.Context) {
 		return
 	}
 
-	newUser, err := controllers.CreateUser(userData)
+	err := helpers.ValidateStruct(userData)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Register failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	newUser, err := controllers.CreateUser(models.User{
+		Username: userData.Username,
+		Email:    userData.Email,
+		Password: userData.Password,
+	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Register failed",
@@ -46,24 +60,109 @@ func registerHandler(c *gin.Context) {
 }
 
 func loginHandler(c *gin.Context) {
+	var userData models.UserLogin
+	if err := c.ShouldBindJSON(&userData); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Login failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	err := helpers.ValidateStruct(userData)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Login failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	existUser, err := controllers.GetUserByEmail(userData.Email)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Login failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	if existUser.Password != userData.Password {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Login failed",
+			"data":    nil,
+			"error":   "Invalid password",
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Login Endpoint",
-		"data":    nil,
+		"message": "Login success",
+		"data":    existUser,
 	})
 }
 
 func updateUserHandler(c *gin.Context) {
 	userID := c.Param("userID")
+
+	var userData models.UserUpdate
+	if err := c.ShouldBindJSON(&userData); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Update User failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	err := helpers.ValidateStruct(userData)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Update User failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	updatedUser, err := controllers.UpdateUserByID(userID, models.User{
+		Username: userData.Username,
+		Email:    userData.Email,
+		Password: userData.Password,
+	})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Update User failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Update User Endpoint",
-		"data":    userID,
+		"message": "Update User success",
+		"data":    updatedUser,
 	})
 }
 
 func deleteUserHandler(c *gin.Context) {
 	userID := c.Param("userID")
+
+	err := controllers.DeleteUserByID(userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Delete User failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Delete User Endpoint",
-		"data":    userID,
+		"message": "Delete User success",
+		"data":    nil,
 	})
 }

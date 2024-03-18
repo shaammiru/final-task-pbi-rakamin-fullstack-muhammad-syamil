@@ -15,3 +15,65 @@ func CreateUser(userData models.User) (models.User, error) {
 
 	return newUser, nil
 }
+
+func GetUserByID(userID string) (models.User, error) {
+	var user models.User
+
+	result := database.DB.First(&user, userID)
+	if result.Error != nil {
+		return user, result.Error
+	}
+
+	return user, nil
+}
+
+func GetUserByEmail(email string) (models.User, error) {
+	var user models.User
+
+	result := database.DB.Where("email = ?", email).First(&user)
+	if result.Error != nil {
+		return user, result.Error
+	}
+
+	return user, nil
+}
+
+func UpdateUserByID(userID string, userData models.User) (models.User, error) {
+	user, err := GetUserByID(userID)
+	if err != nil {
+		return user, err
+	}
+
+	if userData.Username != "" {
+		user.Username = userData.Username
+	}
+
+	if userData.Email != "" {
+		user.Email = userData.Email
+	}
+
+	if userData.Password != "" {
+		user.Password = userData.Password
+	}
+
+	result := database.DB.Save(&user)
+	if result.Error != nil {
+		return user, result.Error
+	}
+
+	return user, nil
+}
+
+func DeleteUserByID(userID string) error {
+	user, err := GetUserByID(userID)
+	if err != nil {
+		return err
+	}
+
+	result := database.DB.Delete(&user)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

@@ -1,10 +1,9 @@
 package database
 
 import (
+	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
 )
 
 var DB *gorm.DB
