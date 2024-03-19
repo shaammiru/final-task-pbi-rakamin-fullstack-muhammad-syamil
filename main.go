@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	router := app.InitApp()
+	server := app.InitApp()
 
 	database.InitDB()
 	database.MigrateDB()
 
-	log.Fatal(router.Run(":3000"))
+	log.Fatal(server.Run(":3000"))
 }
