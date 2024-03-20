@@ -39,6 +39,16 @@ func registerHandler(c *gin.Context) {
 		return
 	}
 
+	userData.Password, err = helpers.HashPassword(userData.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Register failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
 	newUser, err := controllers.CreateUser(models.User{
 		Username: userData.Username,
 		Email:    userData.Email,
@@ -90,7 +100,8 @@ func loginHandler(c *gin.Context) {
 		return
 	}
 
-	if existUser.Password != userData.Password {
+	err = helpers.ComparePassword(existUser.Password, userData.Password)
+	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "Login failed",
 			"data":    nil,
