@@ -48,3 +48,20 @@ func GenerateToken(payload models.User) (string, error) {
 
 	return signedToken, nil
 }
+
+func GetTokenClaims(tokenString string) (UserClaims, error) {
+	claims := UserClaims{}
+
+	token, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte("secret"), nil
+	})
+	if err != nil {
+		return claims, err
+	}
+
+	if !token.Valid {
+		return claims, jwt.ErrSignatureInvalid
+	}
+
+	return claims, nil
+}

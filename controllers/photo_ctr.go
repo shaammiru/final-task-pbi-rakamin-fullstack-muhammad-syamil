@@ -16,7 +16,7 @@ func CreatePhoto(photoData models.Photo) (models.Photo, error) {
 	return newPhoto, nil
 }
 
-func ListPhoto() ([]models.Photo, error) {
+func ListPhotos() ([]models.Photo, error) {
 	var photos []models.Photo
 
 	result := database.DB.Find(&photos)

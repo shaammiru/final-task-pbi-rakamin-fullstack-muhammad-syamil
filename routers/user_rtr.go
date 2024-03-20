@@ -122,7 +122,7 @@ func updateUserHandler(c *gin.Context) {
 	var userData models.UserUpdate
 	if err := c.ShouldBindJSON(&userData); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Update User failed",
+			"message": "Update user failed",
 			"data":    nil,
 			"error":   err.Error(),
 		})
@@ -132,7 +132,7 @@ func updateUserHandler(c *gin.Context) {
 	err := helpers.ValidateStruct(userData)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Update User failed",
+			"message": "Update user failed",
 			"data":    nil,
 			"error":   err.Error(),
 		})
@@ -146,7 +146,7 @@ func updateUserHandler(c *gin.Context) {
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"message": "Update User failed",
+			"message": "Update user failed",
 			"data":    nil,
 			"error":   err.Error(),
 		})
@@ -154,7 +154,7 @@ func updateUserHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Update User success",
+		"message": "Update user success",
 		"data":    updatedUser,
 	})
 }
