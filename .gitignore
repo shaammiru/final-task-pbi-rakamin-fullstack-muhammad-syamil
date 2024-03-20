@@ -11,9 +11,6 @@
 # Temporary build binaries
 tmp
 
-# Air configuration file
-.air.toml
-
 # Test binary, built with `go test -c`
 *.test
 

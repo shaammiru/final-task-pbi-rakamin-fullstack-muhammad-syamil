@@ -5,6 +5,7 @@
 - Docker (Containerization)
 - Postman (API Testing)
 - PostgreSQL (Database)
+- Golang Air (Live Reload)
 
 ## Package yang digunakan
 - github.com/gin-gonic/gin (Web Framework)
@@ -20,3 +21,7 @@
 - Jalankan perintah `go run main.go`
 - Aplikasi akan berjalan di `http://localhost:3000`
 - Test API menggunakan tools seperti Postman atau tools lainnya
+
+## Fitur tambahan (eksplorasi)
+- Panic recovery handler
+- JWT versi terbaru (terusan dari github.com/dgrijalva/jwt-go)
