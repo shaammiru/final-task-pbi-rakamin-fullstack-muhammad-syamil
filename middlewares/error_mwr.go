@@ -5,17 +5,7 @@ import (
 	"net/http"
 )
 
-//func GormErrorHandler() gin.HandlerFunc {
-//	return func(c *gin.Context) {
-//		if c.Errors != nil {
-//
-//		}
-//
-//		c.Next()
-//	}
-//}
-
-func ServerErrorHandler() gin.HandlerFunc {
+func ServerPanicHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {

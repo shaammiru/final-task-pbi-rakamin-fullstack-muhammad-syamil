@@ -9,12 +9,12 @@ import (
 func InitApp() *gin.Engine {
 	// gin.SetMode(gin.ReleaseMode)
 
-	router := gin.Default()
+	app := gin.Default()
 
-	router.Use(middlewares.ServerErrorHandler())
+	app.Use(middlewares.ServerPanicHandler())
 
-	routers.SetupUserRouter(router)
-	routers.SetupPhotoRouter(router)
+	routers.SetupUserRouter(app)
+	routers.SetupPhotoRouter(app)
 
-	return router
+	return app
 }

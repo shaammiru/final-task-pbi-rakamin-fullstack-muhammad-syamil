@@ -11,6 +11,7 @@ import (
 func SetupUserRouter(router *gin.Engine) {
 	userRouter := router.Group("/users")
 	{
+		userRouter.GET("/", listUserHandler)
 		userRouter.POST("/register", registerHandler)
 		userRouter.POST("/login", loginHandler)
 		userRouter.PUT("/:userID", updateUserHandler)
@@ -24,7 +25,7 @@ func registerHandler(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Register failed",
 			"data":    nil,
-			"error":   err.Error(),
+			"error":   "Invalid JSON format, check your request body",
 		})
 		return
 	}
@@ -110,9 +111,40 @@ func loginHandler(c *gin.Context) {
 		return
 	}
 
+	token, err := helpers.GenerateToken(models.User{
+		ID:       existUser.ID,
+		Username: existUser.Username,
+		Email:    existUser.Email,
+	})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Login failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Login success",
-		"data":    existUser,
+		"token":   token,
+	})
+}
+
+func listUserHandler(c *gin.Context) {
+	users, err := controllers.ListUsers()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "List users failed",
+			"data":    nil,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "List users success",
+		"data":    users,
 	})
 }
 
@@ -124,7 +156,7 @@ func updateUserHandler(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Update user failed",
 			"data":    nil,
-			"error":   err.Error(),
+			"error":   "Invalid JSON format, check your request body",
 		})
 		return
 	}
@@ -166,7 +198,6 @@ func deleteUserHandler(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Delete User failed",
-			"data":    nil,
 			"error":   err.Error(),
 		})
 		return
@@ -174,6 +205,5 @@ func deleteUserHandler(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Delete User success",
-		"data":    nil,
 	})
 }

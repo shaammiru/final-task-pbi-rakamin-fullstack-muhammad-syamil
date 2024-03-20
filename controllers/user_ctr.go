@@ -16,6 +16,17 @@ func CreateUser(userData models.User) (models.User, error) {
 	return newUser, nil
 }
 
+func ListUsers() ([]models.User, error) {
+	var users []models.User
+
+	result := database.DB.Preload("Photos").Find(&users)
+	if result.Error != nil {
+		return users, result.Error
+	}
+
+	return users, nil
+}
+
 func GetUserByID(userID string) (models.User, error) {
 	var user models.User
 

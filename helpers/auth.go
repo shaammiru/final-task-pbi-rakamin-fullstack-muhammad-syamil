@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
 	"golang.org/x/crypto/bcrypt"
@@ -64,4 +65,13 @@ func GetTokenClaims(tokenString string) (UserClaims, error) {
 	}
 
 	return claims, nil
+}
+
+func GetClaimsFromContext(c *gin.Context) (UserClaims, error) {
+	claims, exists := c.Get("claims")
+	if !exists {
+		return UserClaims{}, jwt.ErrTokenRequiredClaimMissing
+	}
+
+	return claims.(UserClaims), nil
 }
