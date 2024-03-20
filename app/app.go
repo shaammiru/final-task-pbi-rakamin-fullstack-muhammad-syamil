@@ -7,7 +7,7 @@ import (
 )
 
 func InitApp() *gin.Engine {
-	// gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 
 	app := gin.Default()
 

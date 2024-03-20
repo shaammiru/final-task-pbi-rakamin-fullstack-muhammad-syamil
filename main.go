@@ -12,5 +12,7 @@ func main() {
 	database.InitDB()
 	database.MigrateDB()
 
+	println("Server is running on port 3000")
+
 	log.Fatal(server.Run(":3000"))
 }
