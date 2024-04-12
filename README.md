@@ -1,4 +1,4 @@
-# task-5-pbi-fullstack-developer-muhammadsyamil
+# final-task-pbi-rakamin-fullstack-muhammad-syamil
 
 ## Tools yang digunakan
 - Jetbrains GoLand (IDE)
