@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/database"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/database"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/models"
 )
 
 func CreateUser(userData models.User) (models.User, error) {

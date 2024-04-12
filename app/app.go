@@ -2,8 +2,8 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/middlewares"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/routers"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/middlewares"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/routers"
 )
 
 func InitApp() *gin.Engine {

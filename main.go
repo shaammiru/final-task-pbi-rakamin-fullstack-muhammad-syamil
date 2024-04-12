@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/app"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/database"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/app"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/database"
 	"log"
 )
 

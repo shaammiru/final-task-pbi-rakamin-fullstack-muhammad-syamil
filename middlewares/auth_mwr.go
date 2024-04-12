@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/helpers"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/helpers"
 	"net/http"
 )
 

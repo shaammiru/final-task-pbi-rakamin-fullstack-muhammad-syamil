@@ -1,4 +1,4 @@
-module github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil
+module github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil
 
 go 1.22.0
 

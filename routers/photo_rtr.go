@@ -2,10 +2,10 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/controllers"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/helpers"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/middlewares"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/controllers"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/helpers"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/middlewares"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/models"
 	"net/http"
 	"strconv"
 )

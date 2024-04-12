@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

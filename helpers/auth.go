@@ -3,7 +3,7 @@ package helpers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/shaammiru/task-5-pbi-fullstack-developer-muhammadsyamil/models"
+	"github.com/shaammiru/final-task-pbi-rakamin-fullstack-muhammad-syamil/models"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )
